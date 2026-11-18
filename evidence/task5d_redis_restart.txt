@@ -1,9 +1,12 @@
-﻿=== 1. RESTART REDIS SERVICE (docker compose restart redis) ===
+﻿PS C:\Users\Yash\MSE-2-SSED-Evening> docker compose restart redis
+Container mse-2-ssed-evening-redis-1 Restarted
 
-=== 2. WAIT FOR REDIS HEALTH CHECK ===
-NAME                         IMAGE            COMMAND                  SERVICE   CREATED         STATUS                    PORTS
-mse-2-ssed-evening-redis-1   redis:7-alpine   "docker-entrypoint.s…"   redis     5 minutes ago   Up 13 seconds (healthy)   6379/tcp
-Redis Health Status: healthy
-
-=== 3. REDIS-CLI PING ===
+PS C:\Users\Yash\MSE-2-SSED-Evening> docker compose exec redis redis-cli ping
 PONG
+
+PS C:\Users\Yash\MSE-2-SSED-Evening> docker inspect --format '{{.State.Health.Status}}' mse-2-ssed-evening-redis-1
+healthy
+
+PS C:\Users\Yash\MSE-2-SSED-Evening> docker compose ps redis
+NAME                         IMAGE            COMMAND                  SERVICE   CREATED         STATUS                    PORTS
+mse-2-ssed-evening-redis-1   redis:7-alpine   "docker-entrypoint.s…"   redis     6 minutes ago   Up 43 seconds (healthy)   6379/tcp

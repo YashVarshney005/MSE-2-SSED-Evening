@@ -1,29 +1,24 @@
-﻿=== 1. INSERT TEST DATA INTO POSTGRESQL ===
+﻿=== 1. Insert test task into PostgreSQL ===
 INSERT 0 1
 
-=== 2. VERIFY DATA IN POSTGRES BEFORE REMOVING CONTAINER ===
- id | user_id |         title         |   status    
-----+---------+-----------------------+-------------
-  1 |       1 | Task 5 Verification   | Pending
-  2 |       1 | Persistence Test Task | In Progress
-(2 rows)
+=== 2. Query tasks before container destruction ===
+ id | user_id |               title                |  status   |          created_at           
+----+---------+------------------------------------+-----------+-------------------------------
+  5 |       1 | Data Persistence Verification Task | Completed | 2026-11-18 10:25:37.182599+00
+(1 row)
 
 
-=== 3. REMOVE ONLY THE POSTGRES CONTAINER (docker compose rm -sf postgres) ===
+=== 3. Force remove only postgres container (docker compose rm -sf postgres) ===
 Going to remove mse-2-ssed-evening-postgres-1
 
-=== 4. VERIFY POSTGRES CONTAINER IS REMOVED ===
-NAME                            IMAGE                             COMMAND                  SERVICE    CREATED         STATUS                                     PORTS
-mse-2-ssed-evening-backend-1    yashvarshney005/backend:latest    "docker-entrypoint.s…"   backend    4 minutes ago   Up Less than a second (health: starting)   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
-mse-2-ssed-evening-frontend-1   yashvarshney005/frontend:latest   "/docker-entrypoint.…"   frontend   4 minutes ago   Up 4 minutes (healthy)                     0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
-mse-2-ssed-evening-redis-1      redis:7-alpine                    "docker-entrypoint.s…"   redis      4 minutes ago   Up 4 minutes (healthy)                     6379/tcp
+=== 4. Confirm postgres container removed ===
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
 
-=== 5. RECREATE POSTGRES CONTAINER (docker compose up -d postgres) ===
+=== 5. Recreate postgres container (docker compose up -d postgres) ===
 
-=== 6. PROVE DATA STILL EXISTS AFTER RECREATION ===
- id | user_id |         title         |   status    
-----+---------+-----------------------+-------------
-  1 |       1 | Task 5 Verification   | Pending
-  2 |       1 | Persistence Test Task | In Progress
-(2 rows)
+=== 6. Query tasks after recreation - proving volume persistence ===
+ id | user_id |               title                |  status   |          created_at           
+----+---------+------------------------------------+-----------+-------------------------------
+  5 |       1 | Data Persistence Verification Task | Completed | 2026-11-18 10:25:37.182599+00
+(1 row)
 
