@@ -1,0 +1,58 @@
+﻿=== 1. CURL FRONTEND ROOT (HTTP 200 via Nginx Port 8080) ===
+HTTP/1.1 200 OK
+Server: nginx/1.27.5
+Date: Wed, 18 Nov 2026 09:24:22 GMT
+Content-Type: text/html
+Content-Length: 368
+Last-Modified: Wed, 18 Nov 2026 09:10:49 GMT
+Connection: keep-alive
+ETag: "6afd6b99-170"
+Accept-Ranges: bytes
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>TaskFlow</title>  <script type="module" crossorigin src="/assets/index-Dp5VgsuS.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CSCkzEz8.css">
+</head>
+  <body><div id="root"></div></body>
+</html>
+
+=== 2. CURL /health THROUGH FRONTEND REVERSE PROXY ===
+HTTP/1.1 200 OK
+Server: nginx/1.27.5
+Date: Wed, 18 Nov 2026 09:24:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 44
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"2c-d2LPyhsMk8568OcplHE1z5Ny8tA"
+
+{"status":"ok","postgres":"ok","redis":"ok"}
+
+=== 3. LOGIN VIA FRONTEND PROXY AND FETCH TASKS ===
+Token received successfully.
+HTTP/1.1 201 Created
+Server: nginx/1.27.5
+Date: Wed, 18 Nov 2026 09:24:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 215
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"d7-/obbtxhvoPivmgqczfQk+NpwPiE"
+
+{"task":{"id":1,"user_id":1,"title":"Task 5 Verification","description":"Verify frontend to backend communication","status":"Pending","created_at":"2026-11-18T09:24:22.727Z","updated_at":"2026-11-18T09:24:22.727Z"}}
+
+=== 4. GET TASKS THROUGH FRONTEND REVERSE PROXY ===
+HTTP/1.1 200 OK
+Server: nginx/1.27.5
+Date: Wed, 18 Nov 2026 09:24:22 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 226
+Connection: keep-alive
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+ETag: W/"e2-bG0VhsFiwXgcgLWJ/CXgYkQAj1U"
+
+{"tasks":[{"id":1,"title":"Task 5 Verification","description":"Verify frontend to backend communication","status":"Pending","created_at":"2026-11-18T09:24:22.727Z","updated_at":"2026-11-18T09:24:22.727Z"}],"source":"postgres"}

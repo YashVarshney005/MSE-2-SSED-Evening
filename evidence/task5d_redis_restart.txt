@@ -1,0 +1,9 @@
+﻿=== 1. RESTART REDIS SERVICE (docker compose restart redis) ===
+
+=== 2. WAIT FOR REDIS HEALTH CHECK ===
+NAME                         IMAGE            COMMAND                  SERVICE   CREATED         STATUS                    PORTS
+mse-2-ssed-evening-redis-1   redis:7-alpine   "docker-entrypoint.s…"   redis     5 minutes ago   Up 13 seconds (healthy)   6379/tcp
+Redis Health Status: healthy
+
+=== 3. REDIS-CLI PING ===
+PONG

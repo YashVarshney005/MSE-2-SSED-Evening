@@ -1,0 +1,79 @@
+﻿=== 1. RESOLVE POSTGRES AND REDIS BY SERVICE NAME INSIDE BACKEND CONTAINER ===
+172.18.0.3        postgres  postgres
+172.18.0.2        redis  redis
+
+=== 2. NSLOOKUP INSIDE BACKEND CONTAINER ===
+Server:		127.0.0.11
+Address:	127.0.0.11:53
+
+Non-authoritative answer:
+
+Non-authoritative answer:
+Name:	postgres
+Address: 172.18.0.3
+
+Server:		127.0.0.11
+Address:	127.0.0.11:53
+
+Non-authoritative answer:
+Name:	redis
+Address: 172.18.0.2
+
+Non-authoritative answer:
+
+
+=== 3. BACKEND CONTAINER CONNECTION LOGS ===
+backend-1  | PostgreSQL connection established
+backend-1  | Redis connection established
+backend-1  | TaskFlow API listening on 3000
+backend-1  | SyntaxError: Unterminated string in JSON at position 13
+backend-1  |     at JSON.parse (<anonymous>)
+backend-1  |     at parse (/app/node_modules/body-parser/lib/types/json.js:96:19)
+backend-1  |     at /app/node_modules/body-parser/lib/read.js:146:18
+backend-1  |     at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+backend-1  |     at invokeCallback (/app/node_modules/raw-body/index.js:238:16)
+backend-1  |     at done (/app/node_modules/raw-body/index.js:227:7)
+backend-1  |     at IncomingMessage.onEnd (/app/node_modules/raw-body/index.js:287:7)
+backend-1  |     at IncomingMessage.emit (node:events:524:28)
+backend-1  |     at endReadableNT (node:internal/streams/readable:1698:12)
+backend-1  |     at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+backend-1  |   expose: true,
+backend-1  |   statusCode: 400,
+backend-1  |   status: 400,
+backend-1  |   body: '{"name":"Yash',
+backend-1  |   type: 'entity.parse.failed'
+backend-1  | }
+backend-1  | SyntaxError: Expected property name or '}' in JSON at position 1
+backend-1  |     at JSON.parse (<anonymous>)
+backend-1  |     at parse (/app/node_modules/body-parser/lib/types/json.js:96:19)
+backend-1  |     at /app/node_modules/body-parser/lib/read.js:146:18
+backend-1  |     at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+backend-1  |     at invokeCallback (/app/node_modules/raw-body/index.js:238:16)
+backend-1  |     at done (/app/node_modules/raw-body/index.js:227:7)
+backend-1  |     at IncomingMessage.onEnd (/app/node_modules/raw-body/index.js:287:7)
+backend-1  |     at IncomingMessage.emit (node:events:524:28)
+backend-1  |     at endReadableNT (node:internal/streams/readable:1698:12)
+backend-1  |     at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+backend-1  |   expose: true,
+backend-1  |   statusCode: 400,
+backend-1  |   status: 400,
+backend-1  |   body: '{\\',
+backend-1  |   type: 'entity.parse.failed'
+backend-1  | }
+backend-1  | SyntaxError: Unterminated string in JSON at position 13
+backend-1  |     at JSON.parse (<anonymous>)
+backend-1  |     at parse (/app/node_modules/body-parser/lib/types/json.js:96:19)
+backend-1  |     at /app/node_modules/body-parser/lib/read.js:146:18
+backend-1  |     at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+backend-1  |     at invokeCallback (/app/node_modules/raw-body/index.js:238:16)
+backend-1  |     at done (/app/node_modules/raw-body/index.js:227:7)
+backend-1  |     at IncomingMessage.onEnd (/app/node_modules/raw-body/index.js:287:7)
+backend-1  |     at IncomingMessage.emit (node:events:524:28)
+backend-1  |     at endReadableNT (node:internal/streams/readable:1698:12)
+backend-1  |     at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+backend-1  |   expose: true,
+backend-1  |   statusCode: 400,
+backend-1  |   status: 400,
+backend-1  |   body: '{"name":"Yash',
+backend-1  |   type: 'entity.parse.failed'
+backend-1  | }
